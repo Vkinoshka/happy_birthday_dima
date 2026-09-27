@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday ❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- СТАРТОВОЕ СЕРДЦЕ -->
+  <div id="heartOverlay">
+    <button id="heartIcon" class="heart pulse" aria-label="Открыть поздравление">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 88 C42 79, 13 62, 13 38 C13 22, 23 13, 36 13 C43 13, 48 16, 50 22 C52 16, 57 13, 64 13 C77 13, 87 22, 87 38 C87 62, 58 79, 50 88 Z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ПЕРВЫЙ ЭКРАН -->
+  <section id="welcome">
+
+    <div class="flag-garland flag-garland-left">
+      <div class="garland-string"></div>
+      <div class="flag flag-red"></div>
+      <div class="flag flag-blue"></div>
+      <div class="flag flag-peach"></div>
+      <div class="flag flag-yellow"></div>
+      <div class="flag flag-red"></div>
+    </div>
+
+    <div class="flag-garland flag-garland-right">
+      <div class="garland-string"></div>
+      <div class="flag flag-red"></div>
+      <div class="flag flag-blue"></div>
+      <div class="flag flag-peach"></div>
+      <div class="flag flag-yellow"></div>
+      <div class="flag flag-red"></div>
+    </div>
+
+    <div class="welcome-content">
+      <h1 class="plush-title">
+        <span class="plush-word" data-text="HAPPY">HAPPY</span>
+        <span class="plush-word" data-text="BIRTHDAY">BIRTHDAY</span>
+      </h1>
+    </div>
+
+    <span class="sparkle sparkle-1">✦</span>
+    <span class="sparkle sparkle-2">✧</span>
+    <span class="sparkle sparkle-3">✦</span>
+    <span class="sparkle sparkle-4">✧</span>
+  </section>
+
+  <main>
+
+    <!-- МУЗЫКА -->
+    <section class="section music-section">
+      <div class="music-content">
+        <div class="music-symbol">♫</div>
+        <div class="music-text">
+          <h3>Музыка для хорошего настроения</h3>
+        </div>
+        <button id="musicButton" class="music-button" aria-label="Включить музыку">▶</button>
+      </div>
+      <audio id="birthdayMusic" src="yes.mp3"></audio>
+    </section>
+
+    <!-- ФОТО -->
+    <section id="photos" class="section photo-section">
+      <div class="section-title">
+        <div class="section-icon">♡</div>
+        <h2>Счастливые моменты вместе</h2>
+        <p>спасибо, что ты всегда рядом</p>
+      </div>
+
+      <div class="carousel-container">
+        <button id="prevButton" class="carousel-button carousel-prev" aria-label="Предыдущее фото">←</button>
+
+        <div class="carousel-window">
+          <div id="carouselTrack" class="carousel-track">
+            <div class="photo-card"><img src="25.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="26.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="27.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="28.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="1.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="2.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="3.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="5.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="6.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="7.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="8.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="9.jpg"  alt="Наше фото"></div>
+            <div class="photo-card"><img src="10.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="11.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="12.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="13.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="14.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="15.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="16.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="17.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="18.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="20.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="19.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="21.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="22.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="23.jpg" alt="Наше фото"></div>
+            <div class="photo-card"><img src="24.jpg" alt="Наше фото"></div>
+          </div>
+        </div>
+
+        <button id="nextButton" class="carousel-button carousel-next" aria-label="Следующее фото">→</button>
+      </div>
+
+      <div id="carouselDots" class="carousel-dots"></div>
+    </section>
+
+    <!-- ПОЗДРАВЛЕНИЕ -->
+    <section class="section letter-section">
+      <div class="section-title">
+        <div class="section-icon">♡</div>
+        <h2>С днём рождения</h2>
+      </div>
+
+      <div class="letter">
+        <p class="letter-greeting">Мой любимый,</p>
+
+        <p>Сегодня особенный день - твой день рождения</p>
+
+        <p>
+          Благодарю твоих родителей, они вырастили и воспитали очень достойного человека.
+          Уверена, они гордятся тобой, каждой твоей победой.
+          Тебе очень повезло с родителями, а им повезло ни чуть не меньше с тобой.
+        </p>
+
+        <p>
+          Я искренне желаю, чтобы ты был счастлив. Чтобы сбывались
+          самые заветные мечты, а рядом были любимые люди
+          и всегда находились силы идти к тому,
+          чего ты действительно хочешь.
+        </p>
+
+        <p>
+          Я хочу сказать тебе спасибо. Спасибо за наши
+          моменты, за смех, за поддержку, за разговоры,
+          за приключения и даже за самые обычные дни,
+          которые рядом с тобой становятся особенными.
+        </p>
+
+        <p class="letter-ending">Happy Birthday ❤️</p>
+
+        <div class="signature">
+          С любовью,<br>
+          твой Викулик-лапулик ♡
+        </div>
+      </div>
+    </section>
+
+    <!-- ВИДЕО (5 штук) -->
+    <section class="section video-section">
+      <div class="section-title">
+        <div class="section-icon">✦</div>
+        <h2>Кажется, мы подготовили<br>что-то ещё</h2>
+        <p>пупупупу</p>
+      </div>
+
+      <div class="video-carousel" id="videoCarousel">
+        <div class="video-track" id="videoTrack">
+
+          <div class="video-slide" data-orientation="horizontal">
+            <video controls preload="metadata" playsinline>
+              <source src="v1.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="video-slide" data-orientation="vertical">
+            <video controls preload="metadata" playsinline>
+              <source src="v2.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="video-slide" data-orientation="horizontal">
+            <video controls preload="metadata" playsinline>
+              <source src="v3.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="video-slide" data-orientation="vertical">
+            <video controls preload="metadata" playsinline>
+              <source src="v4.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <button class="vc-btn prev" id="vcPrev" aria-label="Предыдущее видео">‹</button>
+        <button class="vc-btn next" id="vcNext" aria-label="Следующее видео">›</button>
+
+        <div class="vc-dots" id="vcDots">
+          <button class="vc-dot active" data-i="0"></button>
+          <button class="vc-dot" data-i="1"></button>
+          <button class="vc-dot" data-i="2"></button>
+          <button class="vc-dot" data-i="3"></button>
+          <button class="vc-dot" data-i="4"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ДИМУЛИК -->
+    <section class="section best-section">
+      <div class="section-title">
+        <div class="section-icon">♡</div>
+        <h2>Димулик, ты у меня самый...</h2>
+        <p>нажми на цифру и узнай</p>
+      </div>
+
+      <div class="best-grid">
+        <button class="best-card quality-card">
+          <span class="best-number">1</span>
+          <span class="best-quality">Умный</span>
+        </button>
+        <button class="best-card quality-card">
+          <span class="best-number">2</span>
+          <span class="best-quality">Добрый</span>
+        </button>
+        <button class="best-card quality-card">
+          <span class="best-number">3</span>
+          <span class="best-quality">Красивый</span>
+        </button>
+        <button class="best-card quality-card">
+          <span class="best-number">4</span>
+          <span class="best-quality">Спортивный</span>
+        </button>
+        <button class="best-card quality-card best-card-large">
+          <span class="best-number">5</span>
+          <span class="best-quality">Лучший программист</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ФИНАЛ -->
+    <section class="final-section">
+      <div class="final-content">
+        <p class="final-small">sweet 25</p>
+
+        <h2>Я верю в тебя больше всех на свете</h2>
+
+        <button id="secretButton" class="secret-button">тык ♡</button>
+
+        <div id="secretMessage" class="secret-message">
+          <div class="secret-heart">❤️</div>
+
+          <p>
+            Дима, ты самый лучший человек, которого я знаю. Твой путь тернист и очень непрост.
+            Тебе пришлось через многое пройти, чтобы сейчас быть на этом месте.
+            Я очень восхищаюсь тобой и горжусь!
+          </p>
+          <p>
+            В твои 25 я желаю никогда не останавливаться. Всегда быть уверенным в своих решениях.
+            И, конечно, желаю квартиру на Фукуоке, в Москве или Тбилиси.
+          </p>
+          <p>
+            Пусть сбудутся все твои мечты. Желаю, чтобы каждый твой новый день приносил радость,
+            а рядом всегда были люди, которые тебя ценят и поддерживают.
+            С днем рождения, мой дорогой!
+          </p>
+
+          <h3>Пусть у тебя все получится</h3>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Викулик жестко вайбкодила с любовью к тебе и ненавистью к ии ♡
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

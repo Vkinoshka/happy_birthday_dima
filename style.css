@@ -1,0 +1,839 @@
+/* =====================================
+   ОБЩИЕ
+===================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Montserrat", Arial, sans-serif;
+  color: #4d4038;
+  background: linear-gradient(180deg, #faf8f5 0%, #f3ede7 100%);
+  overflow-x: hidden;
+}
+
+button { font-family: inherit; }
+
+
+/* =====================================
+   СТАРТОВОЕ СЕРДЦЕ
+===================================== */
+
+#heartOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle, #ffffff 0%, #f1e8e0 100%);
+  z-index: 9999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#heartOverlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.heart svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.heart path {
+  fill: #e1263e;
+  filter: drop-shadow(0 10px 20px rgba(220, 40, 65, 0.18));
+}
+
+.heart.pulse { animation: heartPulse 1.3s ease-in-out infinite; }
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+
+.heart.explode { animation: heartExplode 0.7s ease-out forwards; }
+
+@keyframes heartExplode {
+  0%   { opacity: 1; transform: scale(var(--final-scale)); }
+  65%  { opacity: 1; transform: scale(calc(var(--final-scale) * 1.12)); }
+  100% { opacity: 0; transform: scale(0); }
+}
+
+
+/* =====================================
+   ЧАСТИЦЫ
+===================================== */
+
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  color: #e1263e;
+  animation: particleFly 1.4s ease-out forwards;
+}
+
+@keyframes particleFly {
+  0%   { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0.2) rotate(var(--rotation)); }
+}
+
+
+/* =====================================
+   ПЕРВЫЙ ЭКРАН
+===================================== */
+
+#welcome {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 55%, #f6e6d6 0%, #e8d0b8 55%, #d3b394 100%);
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+
+/* =====================================
+   HAPPY BIRTHDAY — ПЛЮШЕВЫЕ ОБЪЁМНЫЕ БУКВЫ
+===================================== */
+
+#welcome h1 {
+  font-family: "Fredoka", "Baloo 2", "Comic Sans MS", sans-serif;
+  font-size: clamp(90px, 16vw, 260px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+}
+
+.plush-word {
+  position: relative;
+  display: inline-block;
+  color: #fff3e6;
+  text-shadow:
+    -2px -2px 0 #b06a4a,
+     2px -2px 0 #b06a4a,
+    -2px  2px 0 #b06a4a,
+     2px  2px 0 #b06a4a,
+
+    0 2px 0 #fffaf3,
+    0 3px 0 #fde5d3,
+
+    0 4px 0 #d18b68,
+    0 5px 0 #c27850,
+    0 6px 0 #b36641,
+    0 7px 0 #a45733,
+    0 8px 0 #944a29,
+    0 9px 0 #843d21,
+    0 10px 0 #74321b,
+
+    0 20px 28px rgba(110, 55, 25, 0.35),
+    0 30px 50px rgba(110, 55, 25, 0.22);
+}
+
+.plush-word::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 250, 240, 0.25) 38%,
+    rgba(255, 255, 255, 0) 60%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#welcome h1 span:last-child {
+  color: #ffe3ec;
+  text-shadow:
+    -2px -2px 0 #b25a72,
+     2px -2px 0 #b25a72,
+    -2px  2px 0 #b25a72,
+     2px  2px 0 #b25a72,
+
+    0 2px 0 #fffafc,
+    0 3px 0 #fcd3dd,
+
+    0 4px 0 #dc8898,
+    0 5px 0 #cd7587,
+    0 6px 0 #be6376,
+    0 7px 0 #af5065,
+    0 8px 0 #a03d54,
+    0 9px 0 #912b43,
+    0 10px 0 #821a33,
+
+    0 20px 28px rgba(120, 30, 60, 0.35),
+    0 30px 50px rgba(120, 30, 60, 0.22);
+}
+
+@keyframes plushFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-6px) rotate(-0.6deg); }
+}
+
+.plush-word { animation: plushFloat 4s ease-in-out infinite; }
+.plush-word:last-child { animation-delay: 0.4s; }
+
+
+/* =====================================
+   ГИРЛЯНДЫ
+===================================== */
+
+.flag-garland {
+  position: absolute;
+  top: 0;
+  width: 330px;
+  height: 180px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.flag-garland-left  { left: 0; }
+.flag-garland-right { right: 0; }
+
+.garland-string {
+  position: absolute;
+  top: -35px;
+  left: -45px;
+  width: 370px;
+  height: 120px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 0 0 50% 50%;
+  transform: rotate(9deg);
+}
+
+.flag-garland-right .garland-string {
+  left: auto;
+  right: -45px;
+  transform: rotate(-9deg);
+}
+
+.flag {
+  position: absolute;
+  width: 40px;
+  height: 48px;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 50% 72%, 18% 100%);
+  box-shadow: 0 6px 10px rgba(80, 50, 35, 0.18);
+}
+
+.flag-red    { background: #ee3f59; }
+.flag-blue   { background: #26445f; }
+.flag-peach  { background: #f3c5af; }
+.flag-yellow { background: #ffd45a; }
+
+.flag-garland-left .flag:nth-of-type(2) { top: 25px; left: 45px;  transform: rotate(-8deg); }
+.flag-garland-left .flag:nth-of-type(3) { top: 52px; left: 105px; transform: rotate(6deg);  }
+.flag-garland-left .flag:nth-of-type(4) { top: 77px; left: 165px; transform: rotate(-5deg); }
+.flag-garland-left .flag:nth-of-type(5) { top: 92px; left: 225px; transform: rotate(5deg);  }
+.flag-garland-left .flag:nth-of-type(6) { top: 82px; left: 285px; transform: rotate(-4deg); }
+
+.flag-garland-right .flag:nth-of-type(2) { top: 25px; right: 45px;  left: auto; transform: rotate(8deg);  }
+.flag-garland-right .flag:nth-of-type(3) { top: 52px; right: 105px; left: auto; transform: rotate(-6deg); }
+.flag-garland-right .flag:nth-of-type(4) { top: 77px; right: 165px; left: auto; transform: rotate(5deg);  }
+.flag-garland-right .flag:nth-of-type(5) { top: 92px; right: 225px; left: auto; transform: rotate(-5deg); }
+.flag-garland-right .flag:nth-of-type(6) { top: 82px; right: 285px; left: auto; transform: rotate(4deg);  }
+
+
+/* =====================================
+   ДЕКОР
+===================================== */
+
+.sparkle {
+  position: absolute;
+  font-size: 20px;
+  color: #a5725a;
+  opacity: 0.6;
+}
+
+.sparkle-1 { top: 30%; left: 25%; }
+.sparkle-2 { bottom: 25%; left: 20%; }
+.sparkle-3 { top: 30%; right: 25%; }
+.sparkle-4 { bottom: 25%; right: 20%; }
+
+
+/* =====================================
+   ОСНОВНОЙ КОНТЕНТ
+===================================== */
+
+main {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 130px 30px 0;
+}
+
+.section { margin-bottom: 130px; }
+
+
+/* =====================================
+   ЗАГОЛОВКИ
+===================================== */
+
+.section-title { margin-bottom: 55px; text-align: center; }
+
+.section-icon {
+  margin-bottom: 15px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 30px;
+  color: #a77868;
+}
+
+.section-title h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(50px, 6vw, 78px);
+  font-weight: 500;
+  line-height: 0.95;
+  color: #4a3d36;
+}
+
+.section-title p {
+  margin-top: 18px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #89776d;
+}
+
+
+/* =====================================
+   ФОТО-КАРУСЕЛЬ
+===================================== */
+
+.carousel-container { position: relative; width: 100%; }
+.carousel-window    { width: 100%; overflow: hidden; }
+
+.carousel-track {
+  display: flex;
+  gap: 18px;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.photo-card {
+  flex: 0 0 calc((100% - 36px) / 3);
+  height: 360px;
+  overflow: hidden;
+  background: #e8dfd8;
+  box-shadow: 0 15px 35px rgba(60, 45, 38, 0.1);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.photo-card:hover img { transform: scale(1.05); }
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(70, 55, 45, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #5c4a40;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.carousel-prev { left: -22px; }
+.carousel-next { right: -22px; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(80, 65, 55, 0.25);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active { background: #9b7061; transform: scale(1.4); }
+
+
+/* =====================================
+   МУЗЫКА
+===================================== */
+
+.music-section {
+  max-width: 760px;
+  margin: -45px auto 130px;
+}
+
+.music-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px 15px;
+  border-top: 1px solid rgba(70, 55, 45, 0.15);
+  border-bottom: 1px solid rgba(70, 55, 45, 0.15);
+}
+
+.music-symbol { font-size: 32px; color: #a77868; }
+.music-text   { flex: 1; }
+
+.music-text h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 34px;
+  font-weight: 500;
+}
+
+.music-button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #967060;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.3s ease;
+}
+
+.music-button:hover { transform: scale(1.08); }
+
+
+/* =====================================
+   ПОЗДРАВЛЕНИЕ
+===================================== */
+
+.letter {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 70px 80px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 60px rgba(70, 50, 40, 0.05);
+}
+
+.letter p {
+  margin-bottom: 22px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.letter-greeting {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 34px !important;
+  font-weight: 500 !important;
+}
+
+.letter-ending {
+  margin-top: 35px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 30px !important;
+  font-weight: 500 !important;
+}
+
+.signature {
+  margin-top: 45px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 32px;
+  line-height: 1.2;
+  color: #9b7061;
+}
+
+
+/* =====================================
+   ВИДЕО-КАРУСЕЛЬ
+===================================== */
+
+.video-carousel {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #1a1410;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+}
+
+.video-track {
+  display: flex;
+  transition: transform .45s cubic-bezier(.25, .46, .45, .94);
+}
+
+.video-slide {
+  flex: 0 0 100%;
+  height: 70vh;
+  min-height: 380px;
+  max-height: 700px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.video-slide video { display: block; background: #000; }
+
+.video-slide[data-orientation="horizontal"] video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-slide[data-orientation="vertical"] video {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.vc-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  transition: background .2s, transform .2s;
+}
+
+.vc-btn:hover {
+  background: rgba(255, 255, 255, .3);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.vc-btn.prev { left: 16px; }
+.vc-btn.next { right: 16px; }
+
+.vc-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  background: rgba(0, 0, 0, .5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.vc-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .4);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background .3s, transform .3s;
+}
+
+.vc-dot.active { background: #fff; transform: scale(1.2); }
+
+
+/* =====================================
+   ДИМУЛИК
+===================================== */
+
+.best-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.best-card {
+  position: relative;
+  min-height: 180px;
+  border: none;
+  padding: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.best-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(60, 45, 35, 0.08);
+}
+
+.best-card-large { grid-column: span 2; }
+
+.best-number {
+  position: absolute;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 90px;
+  font-weight: 500;
+  color: #a77868;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.best-quality {
+  position: absolute;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 500;
+  color: #4a3d36;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.quality-card.open .best-number  { opacity: 0; transform: scale(0.7); }
+.quality-card.open .best-quality { opacity: 1; transform: translateY(0); }
+
+
+/* =====================================
+   ФИНАЛ
+===================================== */
+
+.final-section {
+  margin-bottom: 0;
+  padding: 120px 30px;
+  text-align: center;
+  background: linear-gradient(135deg, #e8dcd2, #f7f2ed);
+}
+
+.final-content { max-width: 800px; margin: 0 auto; }
+
+.final-small {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #806d63;
+}
+
+.final-section h2 {
+  margin-top: 30px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(52px, 7vw, 90px);
+  font-weight: 500;
+  line-height: 0.95;
+  color: #4a3d36;
+}
+
+.secret-button {
+  margin-top: 45px;
+  padding: 17px 45px;
+  border: 1px solid #8d6859;
+  background: transparent;
+  color: #654f45;
+  cursor: pointer;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.secret-button:hover { background: #8d6859; color: white; }
+
+.secret-message {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.8s ease, opacity 0.8s ease, margin-top 0.8s ease;
+}
+
+.secret-message.active {
+  max-height: 900px;
+  margin-top: 55px;
+  opacity: 1;
+}
+
+.secret-heart { margin-bottom: 25px; font-size: 50px; }
+
+.secret-message p {
+  margin-bottom: 20px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 30px;
+  line-height: 1.3;
+}
+
+.secret-message h3 {
+  margin-top: 35px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 42px;
+  font-weight: 500;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #8c7a70;
+}
+
+
+/* =====================================
+   ПЛАНШЕТ
+===================================== */
+
+@media (max-width: 900px) {
+  main { padding-left: 20px; padding-right: 20px; }
+
+  .photo-card { flex: 0 0 calc((100% - 18px) / 2); }
+
+  .flag-garland  { width: 250px; }
+  .garland-string { width: 280px; }
+}
+
+
+/* =====================================
+   ТЕЛЕФОН
+===================================== */
+
+@media (max-width: 600px) {
+
+  .heart { width: 100px; height: 100px; }
+
+  #welcome h1 {
+    font-size: clamp(60px, 20vw, 120px);
+    line-height: 1;
+  }
+
+  .plush-word {
+    text-shadow:
+      -1px -1px 0 #b06a4a,
+       1px -1px 0 #b06a4a,
+      -1px  1px 0 #b06a4a,
+       1px  1px 0 #b06a4a,
+
+      0 1px 0 #fffaf3,
+      0 2px 0 #fde5d3,
+      0 3px 0 #d18b68,
+      0 4px 0 #c27850,
+      0 5px 0 #b36641,
+      0 6px 0 #a45733,
+
+      0 12px 16px rgba(110, 55, 25, 0.35),
+      0 18px 30px rgba(110, 55, 25, 0.22);
+  }
+
+  #welcome h1 span:last-child {
+    text-shadow:
+      -1px -1px 0 #b25a72,
+       1px -1px 0 #b25a72,
+      -1px  1px 0 #b25a72,
+       1px  1px 0 #b25a72,
+
+      0 1px 0 #fffafc,
+      0 2px 0 #fcd3dd,
+      0 3px 0 #dc8898,
+      0 4px 0 #cd7587,
+      0 5px 0 #be6376,
+      0 6px 0 #af5065,
+
+      0 12px 16px rgba(120, 30, 60, 0.35),
+      0 18px 30px rgba(120, 30, 60, 0.22);
+  }
+
+  .flag-garland { width: 170px; height: 120px; }
+
+  .garland-string { top: -35px; left: -45px; width: 200px; height: 80px; }
+  .flag-garland-right .garland-string { left: auto; right: -45px; }
+
+  .flag { width: 25px; height: 30px; }
+
+  .flag-garland-left .flag:nth-of-type(2)  { top: 15px; left: 22px; }
+  .flag-garland-left .flag:nth-of-type(3)  { top: 32px; left: 58px; }
+  .flag-garland-left .flag:nth-of-type(4)  { top: 48px; left: 94px; }
+  .flag-garland-left .flag:nth-of-type(5)  { top: 58px; left: 128px; }
+  .flag-garland-left .flag:nth-of-type(6)  { top: 48px; left: 158px; }
+
+  .flag-garland-right .flag:nth-of-type(2) { top: 15px; right: 22px;  left: auto; }
+  .flag-garland-right .flag:nth-of-type(3) { top: 32px; right: 58px;  left: auto; }
+  .flag-garland-right .flag:nth-of-type(4) { top: 48px; right: 94px;  left: auto; }
+  .flag-garland-right .flag:nth-of-type(5) { top: 58px; right: 128px; left: auto; }
+  .flag-garland-right .flag:nth-of-type(6) { top: 48px; right: 158px; left: auto; }
+
+  .sparkle { display: none; }
+
+  main { padding: 80px 15px 0; }
+  .section { margin-bottom: 100px; }
+  .section-title { margin-bottom: 35px; }
+  .section-title h2 { font-size: 52px; }
+  .section-title p  { font-size: 8px; line-height: 1.6; }
+
+  .photo-card { flex: 0 0 100%; height: 420px; }
+
+  .carousel-button { width: 38px; height: 38px; }
+  .carousel-prev   { left: 10px; }
+  .carousel-next   { right: 10px; }
+
+  .music-section { margin-bottom: 100px; }
+  .music-text h3 { font-size: 27px; }
+
+  .letter { padding: 45px 25px; }
+  .letter p { font-size: 14px; }
+
+  .best-grid { grid-template-columns: 1fr; }
+  .best-card-large { grid-column: span 1; }
+  .best-card { min-height: 150px; }
+  .best-number { font-size: 75px; }
+
+  .final-section { padding: 90px 20px; }
+  .secret-message p  { font-size: 27px; }
+  .secret-message h3 { font-size: 34px; }
+
+  .video-slide { height: 60vh; min-height: 300px; }
+
+  .vc-btn { width: 40px; height: 40px; font-size: 22px; }
+  .vc-btn.prev { left: 8px; }
+  .vc-btn.next { right: 8px; }
+
+  .vc-dot { width: 8px; height: 8px; }
+  .vc-dots { bottom: 12px; gap: 8px; padding: 6px 12px; }
+}
